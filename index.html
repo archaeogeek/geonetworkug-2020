@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Old-fashioned GeoNetwork Integrations</title>
+
+		<meta name="description" content="Old-fashioned GeoNetwork Integrations">
+		<meta name="author" content="Jo Cook, Astun Technology">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Old-fashioned GeoNetwork Integrations</h2>
+					<p>Jo Cook, Astun Technology</p>
+				</section>
+
+				<section data-background-image="./images/vintage.jpg" alt="vintage pc" class="full" data-background-size="cover">
+					<p class="box-left">Novel approaches to meet customer requirements for data processing and analytics, integrating out-dated technologies within a modern cloud infrastructure</p>
+					<aside class="notes">With the multi-agency GeoNetwork portals that I manage, we've had to come up with some novel approaches to meet customer requirements.</aside>
+				</section>
+
+				<section>
+					<h3>#1: CSV files for bulk updates</h3>
+					<p>Template-based excel spreadsheets or google sheets for metadata updates</p>
+					<image src="./images/template.png" alt="excel template"/>
+					<aside class="notes">The first is that we make extensive use of csv files for bulk updates of metadata records. There are two general use cases for this- the first is when there are lots of data managers who are not trained in using a metadata editor but who need to provide updates, and the second is when there's a need to update hundreds of records at once on a regular basis. This works well because our customers are very used to using spreadsheets. They can share them between all the data managers, copy and paste values over many cells, and we can ensure controlled elements are valid with lookup tables.</aside>
+				</section>
+
+
+				<section>
+					<h4>Python processing</h4>
+					<p>CSV files are processed using the q search endpoint and API for updating records in bulk</p>
+					<aside class="notes">We have python scripts and modules that utilise the GeoNetwork q search endpoint and then the API to update the records in the catalog. Obviously we include lots of logging and error tracking in the python scripts to cope with badly formed csv files!</aside></section>
+
+				<section>
+					<h4>AWS Cloud 9</h4>
+					<p>As customers cannot always install python environments locally, AWS Cloud 9 is used.</p>
+				</section>
+
+				<section>
+					<image src="./images/cloud9.png" alt="S3 bucket"/>
+				</section>
+
+				<section>
+					<h4>Email -> AWS S3 bucket</h4>
+					<p>For regular updates, customers email a csv file to an address associated with an AWS S3 bucket that is accessible to the processing script.</p>
+				</section>
+
+				<section>
+					<image src="./images/s3bucket.png" alt="S3 bucket"/>
+				</section>
+
+				<section>
+					<h3>#2: Zeppelin Analytics</h3>
+					<p>Simpler dashboarding and interrogation of the PostgreSQL back-end database using SQL</p>
+					<image src="./images/zeppelin-logo.png" alt="S3 bucket" style="background-color:white"/>
+					<aside class="notes">Quicker and easier than kibana. Customers know SQL. Utilises things like audit plugin for point in time roll-back of tables. </aside>
+				</section>
+
+				<section>
+					<h4>Integration with GeoNetwork user database</h4>
+					<p>Users can log in with their existing GeoNetwork credentials (admins only)</p>
+					<aside class="notes">Uses a read-only connection to the database to avoid breakage</aside>
+				</section>
+
+				<section data-background-image="./images/audit.png" alt="audit" class="full" data-background-size="contain">
+					<h4 class="box">Complex queries</h4>
+					<p class="box-right">Easily write SQL queries to answer complex questions</p>
+					<aside class="notes">Example- find records with duplicate titles, or enhance link report to include group name</p>
+				</section>
+
+				<section>
+					<h4>Flexible outputs</h4>
+					<p>Easy to change output type, and to download results</p>
+					<image src="./images/zeppelin-download.gif" alt="S3 bucket"/>
+				</section>
+
+				<section>
+					<h3>Conclusions</h3>
+					<ul>
+						<li class="fragment">Spreadsheets and SQL are familiar to end-users</li>
+						<li class="fragment">They meet different use-cases to the standard functionality</li>
+						<li class="fragment">They are easy to transfer between GeoNetwork versions</li>
+						<li class="fragment">Integrated in a modern cloud environment they can be powerful additions to GeoNetwork</li>
+					</ul>
+				</section>
+
+
+
+				<section>
+					<h3>Thank You!</h3>
+					<p>Jo Cook, <a href="astuntechnology.com" target="_blank">Astun Technology</a></p>
+					<p><a href="mailto:jocook@astuntechnology.com?subject=Automating Metadata">jocook@astuntechnology.com</a></p>
+				</section>
+			
+
+		
+			</div>
+
+			<div class="fe-persistent-header">
+ 				<img src=".\images\AstunSmallLogo.png"/>
+			<p style="color:white">Old-fashioned GeoNetwork Integrations</p>
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
