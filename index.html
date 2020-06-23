@@ -16,7 +16,7 @@
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 		<link rel="stylesheet" href="css/custom.css">
 
 		<!-- Theme used for syntax highlighting of code -->
@@ -42,14 +42,18 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
-					<h2>Old-fashioned GeoNetwork Integrations</h2>
-					<p>Jo Cook, Astun Technology</p>
-				</section>
 
 				<section data-background-image="./images/vintage.jpg" alt="vintage pc" class="full" data-background-size="cover">
-					<p class="box-left">Novel approaches to meet customer requirements for data processing and analytics, integrating out-dated technologies within a modern cloud infrastructure</p>
+					<h2 class="box">Old-fashioned GeoNetwork Integrations</h2>
+					<p class="box">Novel approaches to meet customer requirements for data processing and analytics, integrating out-dated technologies within a modern cloud infrastructure</p>
+					<small class="box">Jo Cook, Astun Technology</small>
 					<aside class="notes">With the multi-agency GeoNetwork portals that I manage, we've had to come up with some novel approaches to meet customer requirements.</aside>
+				</section>
+
+				<section data-background-image="./images/scotgov_distorted.png" alt="scotgov" class="full" data-background-size="cover">
+					<h3 class="box">Some background</h3>
+					<p class="box">Astun Technology manage GeoNetwork catalogs for Scottish Government, the Environment Agency, DEFRA, and many local authorities</p>
+					<p class="box">We've also created the Gemini 2.3 Plugin for GeonNetwork</p>
 				</section>
 
 				<section>
@@ -60,22 +64,20 @@
 				</section>
 
 
-				<section>
-					<h4>Python processing</h4>
-					<p>CSV files are processed using the q search endpoint and API for updating records in bulk</p>
-					<aside class="notes">We have python scripts and modules that utilise the GeoNetwork q search endpoint and then the API to update the records in the catalog. Obviously we include lots of logging and error tracking in the python scripts to cope with badly formed csv files!</aside></section>
-
-				<section>
-					<h4>AWS Cloud 9</h4>
-					<p>As customers cannot always install python environments locally, AWS Cloud 9 is used.</p>
+				<section  data-background-image="./images/cloud9-gui.png" alt="cloud9 gui" class="full" data-background-size="cover">
+					<h4 class="box">Python processing in AWS Cloud 9</h4>
+					<p class="box-right">CSV files are processed using the q-search endpoint and API for updating records in bulk<br />
+					As customers cannot always install python environments locally, AWS Cloud 9 is used.</p>
+					<aside class="notes">We have python scripts and modules that utilise the GeoNetwork q search endpoint and then the API to update the records in the catalog. Obviously we include lots of logging and error tracking in the python scripts to cope with badly formed csv files!</aside>
 				</section>
+
 
 				<section>
 					<image src="./images/cloud9.png" alt="S3 bucket"/>
 				</section>
 
 				<section>
-					<h4>Email -> AWS S3 bucket</h4>
+					<h4>Email &rarr; AWS S3 bucket</h4>
 					<p>For regular updates, customers email a csv file to an address associated with an AWS S3 bucket that is accessible to the processing script.</p>
 				</section>
 
